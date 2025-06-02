@@ -1,4 +1,6 @@
 # 🔮 Aura — Transcreva e aja com inteligência
+<img src="./aura-cover.png" alt="Capa do projeto Aura" style="width:100%; border-radius: 12px;" />
+
 
 O **Aura** transforma gravações de reuniões em planos de ação organizados, checklist priorizado e mapa mental interativo — tudo com IA e visual refinado.
 
