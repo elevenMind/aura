@@ -1,0 +1,25 @@
+# Node.js
+node_modules
+.env
+dist
+logs
+*.log
+npm-debug.log*
+
+# Vite
+.vite
+
+# IDEs
+.vscode
+.idea
+.DS_Store
+
+# Sistema
+Thumbs.db
+*.swp
+
+# Testes / builds temporários
+coverage
+build
+temp
+tmp

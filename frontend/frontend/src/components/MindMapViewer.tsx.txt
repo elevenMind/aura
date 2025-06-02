@@ -1,0 +1,91 @@
+import React from "react";
+
+type ActionPlan = {
+  resumo: string[];
+  tarefas: string[];
+  proximos: string[];
+};
+
+interface MindMapViewerProps {
+  actionPlan: ActionPlan;
+}
+
+export default function MindMapViewer({ actionPlan }: MindMapViewerProps) {
+  const width = 800;
+  const height = 600;
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  const radius = 200;
+  const categories = [
+    { title: "Resumo", items: actionPlan.resumo, angle: 0 },
+    { title: "Pendências", items: actionPlan.tarefas, angle: 120 },
+    { title: "Próximos passos", items: actionPlan.proximos, angle: 240 },
+  ];
+
+  return (
+    <div className="flex justify-center items-center py-6">
+      <svg width={width} height={height}>
+        {/* Centro */}
+        <circle cx={centerX} cy={centerY} r={50} fill="#6b46c1" />
+        <text
+          x={centerX}
+          y={centerY}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fill="white"
+          fontSize="14"
+          fontWeight="bold"
+        >
+          Plano de Ação
+        </text>
+
+        {/* Ramos */}
+        {categories.map((cat, i) => {
+          const angleRad = (cat.angle * Math.PI) / 180;
+          const endX = centerX + radius * Math.cos(angleRad);
+          const endY = centerY + radius * Math.sin(angleRad);
+
+          return (
+            <g key={i}>
+              {/* Linha principal */}
+              <line
+                x1={centerX}
+                y1={centerY}
+                x2={endX}
+                y2={endY}
+                stroke="#a78bfa"
+                strokeWidth={2}
+              />
+              {/* Título da categoria */}
+              <text
+                x={endX}
+                y={endY - 10}
+                textAnchor="middle"
+                fontSize="12"
+                fill="#6b46c1"
+                fontWeight="bold"
+              >
+                {cat.title}
+              </text>
+
+              {/* Itens */}
+              {cat.items.map((item, j) => (
+                <text
+                  key={j}
+                  x={endX}
+                  y={endY + 20 + j * 16}
+                  textAnchor="middle"
+                  fontSize="11"
+                  fill="#4c1d95"
+                >
+                  • {item}
+                </text>
+              ))}
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
